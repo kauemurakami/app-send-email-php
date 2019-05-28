@@ -56,7 +56,7 @@ require "./bibliotecas/PHPMailer/POP3.php";
 
 		    //Recipients
 		    $mail->setFrom('kauesarcastico@gmail.com', 'Kauê remetente');
-		    $mail->addAddress('kauesarcastico@gmail.com', 'Destinatario Kauê');     // Add a recipient
+		    $mail->addAddress($mensagem->__get('para'));     // Add a recipient
 		    //$mail->addAddress('ellen@example.com');               // Name is optional
 		    //$mail->addReplyTo('kauesarcastico@gmail.com', 'resposta para ');
 		    //$mail->addCC('cc@example.com');
@@ -68,12 +68,12 @@ require "./bibliotecas/PHPMailer/POP3.php";
 
 		    //Content
 		    $mail->isHTML(true);                                  // Set email format to HTML
-		    $mail->Subject = 'assunto';//assunto
-		    $mail->Body    = '<b>corpo</b> da mensagem do email conteudo'; // conteudo do email
-		    $mail->AltBody = 'Não tenho suporte de elementos html';
+		    $mail->Subject = $mensagem->__get('assunto');//assunto
+		    $mail->Body    = $mensagem->__get('mensagem'); // conteudo do email
+		    $mail->AltBody = 'é necessário utilizar um client que suport html para ter acesso total ao conteudo da mensagem';
 
 		    $mail->send();
-		    echo 'Message has been sent';
+		    echo 'Email enviado com sucesso';
 		} catch (Exception $e) {
 			echo 'Message could not be sent.';
 			echo 'Mailer Error: ' . $mail->ErrorInfo;
